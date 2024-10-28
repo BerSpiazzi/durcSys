@@ -3,6 +3,7 @@ package br.com.durcsys.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +27,20 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Optional<Usuario> findByEmail(String email) {
+    public Usuario findByEmail(String email) {
 
-        return Optional.ofNullable(usuarioRepository.findByEmail(email)).orElseThrow(() -> new UsuarioException("Usuário não encontrado"));
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+
+        if (usuario.isEmpty()) {
+            throw new UsuarioException("Usuário não encontrado", HttpStatus.BAD_REQUEST);
+        }
+
+        return usuario.get();
     }
 
     public Usuario findById(Long id) {
 
-        return Optional.of(usuarioRepository.findById(id)).orElseThrow(() -> new UsuarioException("Usuário não encontrado")).get();
+        return Optional.of(usuarioRepository.findById(id)).orElseThrow(() -> new UsuarioException("Usuário não encontrado", HttpStatus.BAD_REQUEST)).get();
     }
 
     public void deleteUser(Long id) {
@@ -50,6 +57,6 @@ public class UsuarioService {
 
     public List<Usuario> findAll() {
 
-        return null;
+        return Optional.of(usuarioRepository.findAll()).orElseThrow(() -> new UsuarioException("Nenhum usuário encontrado", HttpStatus.BAD_REQUEST));
     }
 }

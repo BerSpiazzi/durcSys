@@ -2,6 +2,7 @@ package br.com.durcsys.service.security;
 
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,7 +31,7 @@ public class AuthenticationService {
         Optional<Usuario> userExists = userRepository.findByEmail(input.email());
 
         if (userExists.isPresent()) {
-            throw new UsuarioException("Usuário já cadastrado");
+            throw new UsuarioException("Usuário já cadastrado", HttpStatus.BAD_REQUEST);
         }
 
         Usuario user = Usuario.builder()
@@ -52,6 +53,6 @@ public class AuthenticationService {
         );
 
         return userRepository.findByEmail(input.email())
-                .orElseThrow(() -> new UsuarioException("Usuário não encontrado"));
+                .orElseThrow(() -> new UsuarioException("Usuário não encontrado", HttpStatus.BAD_REQUEST));
     }
 }
