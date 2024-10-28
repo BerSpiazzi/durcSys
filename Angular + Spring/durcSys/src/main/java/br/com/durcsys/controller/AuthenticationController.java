@@ -10,8 +10,8 @@ import br.com.durcsys.domain.auth.LoginResponse;
 import br.com.durcsys.domain.auth.LoginUserDto;
 import br.com.durcsys.domain.auth.RegisterUserDto;
 import br.com.durcsys.models.Usuario;
-import br.com.durcsys.service.security.JwtService;
 import br.com.durcsys.service.security.AuthenticationService;
+import br.com.durcsys.service.security.JwtService;
 
 @RequestMapping("/auth")
 @RestController

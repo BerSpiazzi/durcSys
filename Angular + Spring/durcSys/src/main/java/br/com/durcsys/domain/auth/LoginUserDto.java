@@ -8,7 +8,7 @@ package br.com.durcsys.domain.auth;
  */
 public record LoginUserDto(
         String email,
-        String password
+        String senha
 ) {
 
 }

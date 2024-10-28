@@ -1,5 +1,7 @@
 package br.com.durcsys.service.security;
 
+import java.util.Optional;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.durcsys.domain.auth.LoginUserDto;
 import br.com.durcsys.domain.auth.RegisterUserDto;
+import br.com.durcsys.exception.UsuarioException;
 import br.com.durcsys.models.Usuario;
 import br.com.durcsys.repository.UsuarioRepository;
 
@@ -24,6 +27,12 @@ public class AuthenticationService {
 
     public Usuario signup(RegisterUserDto input) {
 
+        Optional<Usuario> userExists = userRepository.findByEmail(input.email());
+
+        if (userExists.isPresent()) {
+            throw new UsuarioException("Usuário já cadastrado");
+        }
+
         Usuario user = Usuario.builder()
                 .email(input.email())
                 .senha(passwordEncoder.encode(input.senha()))
@@ -38,11 +47,11 @@ public class AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         input.email(),
-                        input.password()
+                        input.senha()
                 )
         );
 
         return userRepository.findByEmail(input.email())
-                .orElseThrow();
+                .orElseThrow(() -> new UsuarioException("Usuário não encontrado"));
     }
 }
