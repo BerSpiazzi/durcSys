@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import br.com.durcsys.exception.AbstractControllerExceptionHandler;
+import br.com.durcsys.exception.UsuarioException;
 
 @ControllerAdvice
 public class DurcSysControllerExceptionHandler extends AbstractControllerExceptionHandler {
@@ -17,6 +18,12 @@ public class DurcSysControllerExceptionHandler extends AbstractControllerExcepti
     public ResponseEntity<?> securityException(RuntimeException ex, WebRequest request) {
 
         return createResponse(request, ex.getMessage(), HttpStatus.FORBIDDEN, null);
+    }
+
+    @ExceptionHandler({UsuarioException.class})
+    public ResponseEntity<?> usuarioException(RuntimeException ex, WebRequest request) {
+
+        return createResponse(request, ex.getMessage(), HttpStatus.BAD_REQUEST, null);
     }
 
 }
