@@ -2,7 +2,7 @@ package br.com.durcsys.exception;
 
 import java.io.Serial;
 
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
 
@@ -20,9 +20,9 @@ public class UsuarioException extends RuntimeException {
 
     private final String message;
 
-    private final HttpStatusCode status;
+    private final HttpStatus status;
 
-    public UsuarioException(String message, HttpStatusCode status) {
+    public UsuarioException(String message, HttpStatus status) {
 
         this.message = message;
         this.status = status;

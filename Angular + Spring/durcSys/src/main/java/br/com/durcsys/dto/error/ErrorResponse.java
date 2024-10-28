@@ -1,4 +1,4 @@
-package br.com.durcsys.domain.error;
+package br.com.durcsys.dto.error;
 
 import java.io.Serial;
 import java.io.Serializable;

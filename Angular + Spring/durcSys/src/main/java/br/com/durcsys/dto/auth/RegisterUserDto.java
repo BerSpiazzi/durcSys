@@ -1,4 +1,4 @@
-package br.com.durcsys.domain.auth;
+package br.com.durcsys.dto.auth;
 
 public record RegisterUserDto(
 

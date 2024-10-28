@@ -1,4 +1,4 @@
-package br.com.durcsys.domain.auth;
+package br.com.durcsys.dto.auth;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Builder
 
-public class LoginResponse {
+public class LoginResponseDto {
 
     private String token;
 

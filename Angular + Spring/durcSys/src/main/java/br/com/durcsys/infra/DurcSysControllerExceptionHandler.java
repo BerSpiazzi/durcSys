@@ -11,6 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 import br.com.durcsys.exception.AbstractControllerExceptionHandler;
 import br.com.durcsys.exception.UsuarioException;
 
+import io.jsonwebtoken.MalformedJwtException;
+
 @ControllerAdvice
 public class DurcSysControllerExceptionHandler extends AbstractControllerExceptionHandler {
 
@@ -21,9 +23,15 @@ public class DurcSysControllerExceptionHandler extends AbstractControllerExcepti
     }
 
     @ExceptionHandler({UsuarioException.class})
-    public ResponseEntity<?> usuarioException(RuntimeException ex, WebRequest request) {
+    public ResponseEntity<?> usuarioException(UsuarioException ex, WebRequest request) {
 
-        return createResponse(request, ex.getMessage(), HttpStatus.BAD_REQUEST, null);
+        return createResponse(request, ex.getMessage(), ex.getStatus(), null);
+    }
+
+    @ExceptionHandler({MalformedJwtException.class})
+    public ResponseEntity<?> malformedJwtException(MalformedJwtException ex, WebRequest request) {
+
+        return createResponse(request, ex.getMessage(), HttpStatus.UNAUTHORIZED, null);
     }
 
 }

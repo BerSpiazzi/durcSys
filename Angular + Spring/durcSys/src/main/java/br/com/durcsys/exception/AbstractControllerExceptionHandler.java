@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-import br.com.durcsys.domain.error.ErrorField;
-import br.com.durcsys.domain.error.ErrorMessage;
+import br.com.durcsys.dto.error.ErrorField;
+import br.com.durcsys.dto.error.ErrorMessage;
 
 @ControllerAdvice
 @Order(-1)

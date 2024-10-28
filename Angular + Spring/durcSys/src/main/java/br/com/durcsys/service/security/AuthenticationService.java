@@ -8,8 +8,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.durcsys.domain.auth.LoginUserDto;
-import br.com.durcsys.domain.auth.RegisterUserDto;
+import br.com.durcsys.dto.auth.LoginUserDto;
+import br.com.durcsys.dto.auth.RegisterUserDto;
 import br.com.durcsys.exception.UsuarioException;
 import br.com.durcsys.models.Usuario;
 import br.com.durcsys.repository.UsuarioRepository;

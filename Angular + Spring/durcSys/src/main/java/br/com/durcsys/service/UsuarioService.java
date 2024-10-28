@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.durcsys.dto.UsuarioDto;
 import br.com.durcsys.exception.UsuarioException;
 import br.com.durcsys.models.Usuario;
 import br.com.durcsys.repository.UsuarioRepository;
@@ -21,10 +22,18 @@ public class UsuarioService {
 
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public Usuario saveUser(Usuario usuario) {
+    public UsuarioDto saveUser(Usuario usuario) {
+
+        Usuario user = usuarioRepository.findByEmail(usuario.getEmail()).orElse(null);
+
+        if (user != null) {
+            throw new UsuarioException("Usuário já cadastrado", HttpStatus.BAD_REQUEST);
+        }
 
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-        return usuarioRepository.save(usuario);
+        Usuario newUsuario = usuarioRepository.save(usuario);
+
+        return UsuarioDto.from(newUsuario);
     }
 
     public Usuario findByEmail(String email) {
@@ -52,11 +61,17 @@ public class UsuarioService {
 
     public Usuario updateUser(Usuario usuario) {
 
-        return usuarioRepository.save(usuario);
+        Usuario existingUsuario = findById(usuario.getId());
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        usuarioRepository.update(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+        return usuario;
     }
 
-    public List<Usuario> findAll() {
+    public List<UsuarioDto> findAll() {
 
-        return Optional.of(usuarioRepository.findAll()).orElseThrow(() -> new UsuarioException("Nenhum usuário encontrado", HttpStatus.BAD_REQUEST));
+        List<Usuario> usuarios = Optional.of(usuarioRepository.findAll())
+                .orElseThrow(() -> new UsuarioException("Nenhum usuário encontrado", HttpStatus.BAD_REQUEST));
+
+        return UsuarioDto.from(usuarios);
     }
 }
