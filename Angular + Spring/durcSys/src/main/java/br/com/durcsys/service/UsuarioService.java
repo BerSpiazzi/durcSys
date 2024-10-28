@@ -59,12 +59,13 @@ public class UsuarioService {
         usuarioRepository.delete(usuario);
     }
 
-    public Usuario updateUser(Usuario usuario) {
+    public UsuarioDto updateUser(Usuario usuario) {
 
-        Usuario existingUsuario = findById(usuario.getId());
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+
         usuarioRepository.update(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
-        return usuario;
+
+        return UsuarioDto.from(usuario);
     }
 
     public List<UsuarioDto> findAll() {
