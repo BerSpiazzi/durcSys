@@ -19,7 +19,7 @@ public class DurcSysControllerExceptionHandler extends AbstractControllerExcepti
     @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
     public ResponseEntity<?> securityException(RuntimeException ex, WebRequest request) {
 
-        return createResponse(request, ex.getMessage(), HttpStatus.FORBIDDEN, null);
+        return createResponse(request, "Credenciais inválidas", HttpStatus.FORBIDDEN, null);
     }
 
     @ExceptionHandler({UsuarioException.class})

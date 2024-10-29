@@ -1,13 +1,12 @@
 package br.com.durcsys.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.durcsys.dto.auth.LoginResponseDto;
+import br.com.durcsys.dto.auth.AuthResponseDto;
 import br.com.durcsys.dto.auth.LoginUserDto;
 import br.com.durcsys.dto.auth.RegisterUserDto;
 import br.com.durcsys.models.Usuario;
@@ -16,7 +15,6 @@ import br.com.durcsys.service.security.JwtService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
@@ -44,17 +42,18 @@ public class AuthenticationController {
     @Operation(summary = "Autenticar usuário",
             description = "Autentica um usuário no sistema através da tela inicial de login")
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
+    public ResponseEntity<AuthResponseDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
 
         Usuario authenticatedUser = authenticationService.authenticate(loginUserDto);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
-        LoginResponseDto loginResponseDto = LoginResponseDto.builder()
+        AuthResponseDto authResponseDto = AuthResponseDto.builder()
+                .nome(authenticatedUser.getNome())
                 .token(jwtToken)
                 .expiresIn(jwtService.getExpirationTime())
                 .build();
 
-        return ResponseEntity.ok(loginResponseDto);
+        return ResponseEntity.ok(authResponseDto);
     }
 }
