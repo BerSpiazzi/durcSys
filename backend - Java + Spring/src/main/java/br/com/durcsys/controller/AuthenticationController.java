@@ -1,6 +1,7 @@
 package br.com.durcsys.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import br.com.durcsys.service.security.JwtService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
