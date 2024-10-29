@@ -55,7 +55,7 @@ export class AuthService {
 
   logout(): void {
     this.delete();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/admin/login'])
   }
 
 }

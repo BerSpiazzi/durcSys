@@ -12,10 +12,14 @@ import {ToastModule} from 'primeng/toast';
 import {InputTextModule} from 'primeng/inputtext';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {RippleModule} from 'primeng/ripple';
+import {InputTextValidationComponent} from './components/input/input-text-validation.component';
+import {EmptyTableComponent} from './components/empty-table/empty-table.component';
 
 @NgModule({
   declarations: [
     LoadingComponent,
+    InputTextValidationComponent,
+    EmptyTableComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +42,8 @@ import {RippleModule} from 'primeng/ripple';
     ToastModule,
     InputTextModule,
     LoadingComponent,
+    InputTextValidationComponent,
+    EmptyTableComponent,
   ]
 })
 export class SharedModule {

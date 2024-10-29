@@ -1,0 +1,48 @@
+<div class="layout-cadastro">
+  <div class="card">
+    <form [formGroup]="usuarioForm">
+      <div class="grid p-fluid">
+        <div class="col-4 flex flex-column gap-1">
+          <label for="nome">Nome</label>
+          <input id="nome"
+                 type="text"
+                 pInputText
+                 formControlName="nome"
+                 placeholder="Informe a descrição"/>
+          <app-input-text-validation [formGroup]="usuarioForm" fieldName="nome"></app-input-text-validation>
+        </div>
+        <div class="col-4 flex flex-column gap-1">
+          <label>E-mail</label>
+          <input id="email"
+                 type="email"
+                 pInputText
+                 formControlName="email"
+                 placeholder="Informe o e-mail"/>
+          <div *ngIf="usuarioForm.get('email')?.invalid && usuarioForm.get('email')?.touched"
+               class="text-red-500 text-xs">E-mail inválido
+          </div>
+        </div>
+        <div class="col-2 flex flex-column gap-1">
+          <label for="senha">Senha</label>
+          <input id="senha"
+                 type="password"
+                 pInputText
+                 formControlName="senha"
+                 placeholder="Informe a senha"/>
+          <div *ngIf="usuarioForm.get('senha')?.invalid && usuarioForm.get('senha')?.touched"
+               class="text-red-500 text-xs">E-mail inválido
+          </div>
+        </div>
+        <div class="col-2 flex flex-column gap-1">
+          <label for="confirmSenha">Confirmação de Senha</label>
+          <input id="confirmSenha"
+                 type="password"
+                 pInputText
+                 formControlName="confirmSenha"
+                 placeholder="Confirme a senha"/>
+          <app-input-text-validation [formGroup]="usuarioForm" fieldName="confirmSenha"></app-input-text-validation>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

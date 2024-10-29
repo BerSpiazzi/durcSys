@@ -14,8 +14,8 @@
         <i class="pi pi-plus" pTooltip="Incluir"></i>
       </button>
 
-      <button class="p-link layout-topbar-button" (click)="changeTheme()">
-        <i class="pi {{this.layoutService.config.colorScheme === 'light' ? 'pi-moon' : 'pi-sun'}}"></i>
+      <button *ngIf="showSalvar??false" class="p-link layout-topbar-button" (click)="salvar()">
+        <i class="pi pi-save" pTooltip="Salvar"></i>
       </button>
 
       <button class="p-link layout-topbar-button" (click)="op.toggle($event)">

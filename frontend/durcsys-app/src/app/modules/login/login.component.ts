@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         if (response) {
           this.authService.setAuthResponse(response);
-          this.router.navigate(['/home/usuarios']);
+          this.router.navigate(['admin//home/usuarios']);
         }
       },
       error: (error) => {
@@ -101,6 +101,7 @@ export class LoginComponent implements OnInit {
             acceptLabel: 'OK',
             rejectVisible: false,
           });
+          this.registerFormGroup.reset();
           this.showStepper = false;
         }
       },

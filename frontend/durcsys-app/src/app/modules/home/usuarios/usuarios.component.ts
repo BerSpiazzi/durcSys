@@ -7,6 +7,9 @@ import {UsuarioDto} from '../../../dtos/usuario.dto';
 import {ConfirmationService} from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {UsuarioEditComponent} from './edit/usuario-edit.component';
+import {AuthService} from '../../../core/auth.service';
+import {LayoutService} from '../../../shared/services/layout.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -15,9 +18,14 @@ import {UsuarioEditComponent} from './edit/usuario-edit.component';
 })
 export class UsuariosComponent implements OnInit {
 
+  title: string = 'Lista de Usuários';
+
   private destroy$ = new Subject();
+
   protected readonly getRowsPerPageOptions = getRowsPerPageOptions;
   protected readonly getRows = getRows;
+
+  showIncluir = true;
 
   ref: DynamicDialogRef | undefined;
 
@@ -28,7 +36,16 @@ export class UsuariosComponent implements OnInit {
     private usuarioService: UsuariosService,
     private confirmService: ConfirmationService,
     private dialogService: DialogService,
+    private authService: AuthService,
+    private layoutService: LayoutService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
+    this.layoutService.titleChange$.pipe(takeUntil(this.destroy$)).subscribe(title => {
+      setTimeout(() => {
+        this.title = title;
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -36,9 +53,11 @@ export class UsuariosComponent implements OnInit {
   }
 
   private buscarUsuarios() {
+    const idUsuario = this.authService.getAuthResponse()?.idUsuario!;
 
     this.loadingService.start('Carregando usuários...');
-    this.usuarioService.findAll()
+    console.log(idUsuario)
+    this.usuarioService.findAll(idUsuario)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (response) => {
@@ -105,5 +124,9 @@ export class UsuariosComponent implements OnInit {
       }
     });
 
+  }
+
+  novo() {
+    this.router.navigate(['./novo'], {relativeTo: this.route});
   }
 }

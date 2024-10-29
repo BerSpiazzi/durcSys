@@ -43,7 +43,7 @@
       </ng-template>
 
       <ng-template pTemplate="body" let-usuario let-rowIndex="rowIndex">
-        <tr [pSelectableRow]="usuario">
+        <tr>
           <td class="text-center">{{ usuario.id }}</td>
           <td class="text-center">{{ usuario.nome }}</td>
           <td class="text-center">{{ usuario.email }}</td>
@@ -52,6 +52,13 @@
                     (click)="openModalEdicao(usuario)"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-outlined p-button-sm"
                     (click)="excluir(usuario)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="3">
+            <app-empty-table></app-empty-table>
           </td>
         </tr>
       </ng-template>
