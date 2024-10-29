@@ -49,6 +49,7 @@ public class AuthenticationController {
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
         AuthResponseDto authResponseDto = AuthResponseDto.builder()
+                .idUsuario(authenticatedUser.getId())
                 .nome(authenticatedUser.getNome())
                 .token(jwtToken)
                 .expiresIn(jwtService.getExpirationTime())

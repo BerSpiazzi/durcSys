@@ -16,6 +16,8 @@ import lombok.Setter;
 
 public class AuthResponseDto {
 
+    private Long idUsuario;
+
     private String nome;
 
     private String token;

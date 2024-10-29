@@ -1,7 +1,6 @@
 package br.com.durcsys.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 
 import io.swagger.v3.oas.annotations.Operation;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/usuarios")
@@ -28,7 +26,7 @@ public class UsuarioController {
 
     @Operation(summary = "Novo usuário",
             description = "Cria um novo usuário no sistema")
-    @PostMapping("/register")
+    @PostMapping("")
     public ResponseEntity<?> register(@RequestBody Usuario usuario) {
 
         return ResponseEntity.ok(usuarioService.saveUser(usuario));
@@ -36,18 +34,10 @@ public class UsuarioController {
 
     @Operation(summary = "Lista de usuários",
             description = "Retorna todos os usuários cadastrados no sistema")
-    @GetMapping
-    public ResponseEntity<?> findAll() {
+    @GetMapping("/{idUsuario}")
+    public ResponseEntity<?> findAll(@PathVariable("idUsuario") Long idUsuario) {
 
-        return ResponseEntity.ok(usuarioService.findAll());
-    }
-
-    @Operation(summary = "Busca usuário por Email",
-            description = "Retorna um usuário específico pelo EMAIL informado")
-    @GetMapping("/{email}")
-    public ResponseEntity<?> findByEmail(@PathVariable String email) {
-
-        return ResponseEntity.ok(usuarioService.findByEmail(email));
+        return ResponseEntity.ok(usuarioService.findAll(idUsuario));
     }
 
     @Operation(summary = "Atualizar usuário",

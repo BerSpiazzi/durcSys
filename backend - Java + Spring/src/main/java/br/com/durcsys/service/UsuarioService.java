@@ -36,17 +36,6 @@ public class UsuarioService {
         return UsuarioDto.from(newUsuario);
     }
 
-    public Usuario findByEmail(String email) {
-
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
-
-        if (usuario.isEmpty()) {
-            throw new UsuarioException("Usuário não encontrado", HttpStatus.BAD_REQUEST);
-        }
-
-        return usuario.get();
-    }
-
     public Usuario findById(Long id) {
 
         return Optional.of(usuarioRepository.findById(id)).orElseThrow(() -> new UsuarioException("Usuário não encontrado", HttpStatus.BAD_REQUEST)).get();
@@ -61,17 +50,17 @@ public class UsuarioService {
 
     public UsuarioDto updateUser(Usuario usuario) {
 
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-
-        usuarioRepository.update(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+        usuarioRepository.update(usuario.getId(), usuario.getNome(), usuario.getEmail());
 
         return UsuarioDto.from(usuario);
     }
 
-    public List<UsuarioDto> findAll() {
+    public List<UsuarioDto> findAll(Long idUsuario) {
 
         List<Usuario> usuarios = Optional.of(usuarioRepository.findAll())
                 .orElseThrow(() -> new UsuarioException("Nenhum usuário encontrado", HttpStatus.BAD_REQUEST));
+
+        usuarios.removeIf(u -> u.getId().equals(idUsuario));
 
         return UsuarioDto.from(usuarios);
     }

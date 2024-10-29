@@ -20,9 +20,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("""
             UPDATE Usuario u 
             SET u.nome = :nome, 
-            u.email = :email, 
-            u.senha = :senha 
+            u.email = :email
             WHERE u.id = :id
             """)
-    void update(Long id, String nome, String email, String senha);
+    void update(Long id, String nome, String email);
 }
