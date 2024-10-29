@@ -1,0 +1,71 @@
+<div class="imagem-login">
+  <div class="flex align-items-center justify-content-end min-h-screen min-w-screen overflow-hidden" style="padding-right: 100px">
+    <div class="flex flex-column align-items-center justify-content-center">
+      <div class="borda-login">
+        <div class="w-full surface-card py-6 px-5 sm:px-8" style="border-radius:53px">
+          <div class="text-center mb-3">
+            DURC SYS
+          </div>
+
+          <form *ngIf="!showStepper" [formGroup]="loginForm">
+
+            <span class="mb-2 flex justify-content-evenly">Faça o login com seu e-mail para continuar.</span>
+            <label for="email" class="block text-900 text-xl font-medium mb-2">E-mail</label>
+            <input id="email" type="email" formControlName="email" placeholder="E-mail" pInputText class="w-full p-3 mb-3" size="40px">
+
+            <label for="senha" class="block text-900 font-medium text-xl mb-2">Senha</label>
+            <input id="senha" type="password" formControlName="senha" placeholder="Senha" pInputText class="w-full p-3 mb-3" size="40px">
+
+            <button pButton pRipple outlined class="block text-900 font-medium text-xl mt-1 mb-3" [label]="'Entrar'"
+                    [icon]="'pi pi-chevron-right'" (click)="entrar()" [disabled]="loginForm.invalid"></button>
+
+            <button pButton pRipple
+                    [label]="'Primeiro Acesso'"
+                    (click)="openStepRegistro()"
+                    class="rounded w-full p-3 p-button-outlined-cadastro">
+            </button>
+
+          </form>
+
+          <form *ngIf="showStepper" [formGroup]="registerFormGroup">
+
+            <span class="mb-2 flex justify-content-evenly">Preencha os campos abaixo para criar sua conta.</span>
+            <label for="emailRegistro" class="block text-900 text-xl font-medium mb-2">E-mail</label>
+            <input id="emailRegistro" type="email" formControlName="email" placeholder="E-mail" pInputText class="w-full p-3 mb-3" size="40px">
+
+            <label for="nome" class="block text-900 text-xl font-medium mb-2">Nome</label>
+            <input id="nome" type="text" formControlName="nome" placeholder="Nome" pInputText class="w-full p-3 mb-3" size="40px">
+
+            <label for="senhaRegistro" class="block text-900 text-xl font-medium mb-2">Senha</label>
+            <input id="senhaRegistro" type="password" formControlName="senha" placeholder="Senha" pInputText class="w-full p-3 mb-3" size="40px">
+
+            <label for="confirmSenha" class="block text-900 text-xl font-medium mb-2">Confirme a senha</label>
+            <input id="confirmSenha" type="password" formControlName="confirmSenha" placeholder="Confirme a senha" pInputText class="w-full p-3 mb-3"
+                   size="40px">
+
+            <div class="flex justify-between">
+
+              <button type="button" pButton pRipple
+                      icon="pi pi-chevron-left"
+                      (click)="this.showStepper = false"
+                      class="rounded block max-h-5rem w-5rem p-button-outlined mr-3">
+
+              </button>
+              <button type="button" pButton pRipple
+                      [label]="'Concluir'"
+                      (click)="registrar()"
+                      class="rounded max-h-5rem w-full p-3 p-button-outlined-cadastro">
+              </button>
+            </div>
+
+          </form>
+
+          <div class="text-center mt-3">
+            <h6>{{ environment.version.version }}</h6>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

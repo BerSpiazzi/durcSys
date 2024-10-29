@@ -1,0 +1,38 @@
+.layout-main-container {
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100vh;
+    justify-content: space-between;
+    padding: 6rem 0.5rem 0.5rem 3rem;
+    transition: margin-left $transitionDuration;
+}
+
+.layout-main {
+    flex: 1 1 auto;
+}
+
+.layout-cadastro {
+    scrollbar-width: none;
+    height: calc(100vh - 6.5rem);
+    z-index: 999;
+    overflow-y: auto;
+    user-select: none;
+    top: 7rem;
+    transition: transform $transitionDuration, left $transitionDuration;
+    background-color: var(--surface-overlay);
+    border-radius: $borderRadius;
+    padding: 0.5rem 0.5rem;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .02), 0px 0px 2px rgba(0, 0, 0, .05), 0px 1px 4px rgba(0, 0, 0, .08);
+}
+
+.p-progressbar .p-progressbar-label {
+    color: var(--surface-overlay);
+    line-height: 1.5rem;
+    display: block !important;
+}
+
+.p-panel .p-panel-header {
+    background: var(--highlight-bg)
+}

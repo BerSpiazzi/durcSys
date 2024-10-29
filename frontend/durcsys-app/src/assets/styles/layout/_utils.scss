@@ -1,0 +1,107 @@
+.card {
+  scrollbar-width: none;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: var(--card-shadow);
+  border-radius: $borderRadius;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.card-cadastro {
+  scrollbar-width: none;
+  position: relative;
+  height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.p-toast {
+  &.p-toast-top-right,
+  &.p-toast-top-left,
+  &.p-toast-top-center {
+    top: 100px;
+  }
+}
+
+.status-badge {
+  border-radius: var(--border-radius);
+  padding: .25em .5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+
+  &.limit-text {
+    display: inline-block;
+    width: 260px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &.status-true {
+    background: #C8E6C9;
+    color: #256029;
+  }
+
+  &.status-false {
+    background: #FFCDD2;
+    color: #C63737;
+  }
+}
+
+.limit-text {
+  width: 260px;
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.divisor {
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-color);
+  margin: 20px 0;
+}
+
+.div-simples {
+  scrollbar-width: none;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+p-dropdown.ng-invalid.ng-touched,
+p-chips.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+.p-inputotp-input {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--surface-border);
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+}
+
+.button.p-ripple.p-element.p-button.p-component {
+  padding: 0;
+}

@@ -1,0 +1,27 @@
+.borda-login {
+  border-radius: 56px;
+  padding: 0.3rem;
+  background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);
+}
+
+.imagem-login {
+  background-image: url("../../../assets/img/login-background.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+}
+
+.rounded {
+  border-radius: 22px;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.input-error-message {
+  color: red;
+  font-size: 0.875em;
+}
+

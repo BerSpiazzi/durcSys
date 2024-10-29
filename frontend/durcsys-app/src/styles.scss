@@ -1,0 +1,14 @@
+$gutter: 1rem;
+
+@import "assets/styles/layout/layout.scss";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
