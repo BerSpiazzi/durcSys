@@ -16,13 +16,13 @@
             <label for="senha" class="block text-900 font-medium text-xl mb-2">Senha</label>
             <input id="senha" type="password" formControlName="senha" placeholder="Senha" pInputText class="w-full p-3 mb-3" size="40px">
 
-            <button pButton pRipple outlined class="block text-900 font-medium text-xl mt-1 mb-3" [label]="'Entrar'"
+            <button pButton pRipple outlined class="rounded block w-full text-900 font-medium text-xl mt-1 mb-3" [label]="'Entrar'"
                     [icon]="'pi pi-chevron-right'" (click)="entrar()" [disabled]="loginForm.invalid"></button>
 
             <button pButton pRipple
                     [label]="'Primeiro Acesso'"
                     (click)="openStepRegistro()"
-                    class="rounded w-full p-3 p-button-outlined-cadastro">
+                    class="rounded block font-medium w-full p-3">
             </button>
 
           </form>
