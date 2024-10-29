@@ -1,29 +1,61 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthResponseDto} from '../dtos/auth-response.dto';
+import {CookieService} from 'ngx-cookie-service';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated = false;
 
-  constructor(private router: Router) {
+  private keyCrypt = "##durc-sys-2024##";
+
+  constructor(
+    private cookieService: CookieService,
+    private router: Router,
+  ) {
   }
 
-  login(username: string, password: string): boolean {
-    if (username === 'admin' && password === 'admin') {
-      this.isAuthenticated = true;
-      return true;
+  setAuthResponse(authResponse: AuthResponseDto): void {
+
+    console.log(authResponse);
+    var encryptCookie = CryptoJS.AES.encrypt(JSON.stringify(authResponse), this.keyCrypt, {
+      keySize: 16,
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7
+    });
+
+    this.cookieService.set('durc-sys-2024-auth', encryptCookie.toString(), {secure: true});
+  }
+
+  getAuthResponse(): AuthResponseDto | null {
+    let auth = this.cookieService.get('durc-sys-2024-auth');
+    if (!auth) {
+      return null;
     }
-    return false;
+
+    var decryptedCookie = CryptoJS.AES.decrypt(
+      auth, this.keyCrypt, {
+        keySize: 16,
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+      }).toString(CryptoJS.enc.Utf8);
+
+    return JSON.parse(decryptedCookie) as AuthResponseDto;
+  }
+
+  check() {
+    return this.cookieService.check('durc-sys-2024-auth');
+  }
+
+  delete() {
+    this.cookieService.delete('durc-sys-2024-auth');
   }
 
   logout(): void {
-    this.isAuthenticated = false;
-    this.router.navigate(['/login']);
+    this.delete();
+    this.router.navigate(['/login'])
   }
 
-  isLoggedIn(): boolean {
-    return this.isAuthenticated;
-  }
 }

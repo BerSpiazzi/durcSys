@@ -7,14 +7,21 @@ import {SharedModule} from './shared/shared.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './modules/login/login.component';
 import {HomeComponent} from './modules/home/home.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {Ripple} from 'primeng/ripple';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {TableModule} from "primeng/table";
+import {UsuariosComponent} from './modules/home/usuarios/usuarios.component';
+import {UsuarioEditComponent} from './modules/home/usuarios/edit/usuario-edit.component';
+import {HttpIntercept} from './core/http.intercept';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    UsuariosComponent,
+    UsuarioEditComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -23,8 +30,14 @@ import {Ripple} from 'primeng/ripple';
     HttpClientModule,
     SharedModule.forRoot(),
     Ripple,
+    OverlayPanelModule,
+    TableModule,
   ],
-  providers: [],
+  exports: [
+    UsuarioEditComponent,
+  ],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpIntercept, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

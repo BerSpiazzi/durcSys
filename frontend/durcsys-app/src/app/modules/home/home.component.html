@@ -1,1 +1,45 @@
-<p>home worksDASSSSSSSSSSSSSSSSSSSSSSSSS!</p>
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <div class="layout-topbar">
+    <a class="layout-topbar-logo">
+      DURC SYS
+    </a>
+
+    <a class="layout-topbar-title">
+      <h4 class="mt-3" *ngIf="title && title !== ''">{{ title }}</h4>
+    </a>
+
+    <div #topbarmenu class="layout-topbar-menu">
+
+      <button *ngIf="showIncluir??false" class="p-link layout-topbar-button" (click)="novo()">
+        <i class="pi pi-plus" pTooltip="Incluir"></i>
+      </button>
+
+      <button class="p-link layout-topbar-button" (click)="changeTheme()">
+        <i class="pi {{this.layoutService.config.colorScheme === 'light' ? 'pi-moon' : 'pi-sun'}}"></i>
+      </button>
+
+      <button class="p-link layout-topbar-button" (click)="op.toggle($event)">
+        <i class="pi pi-user"></i>
+        <p-overlayPanel #op [showCloseIcon]="true" [style]="{borderRadius: '12px'}">
+          <div class="flex flex-column gap-3 w-15rem">
+            <span class="text-center text-color-secondary">{{ authService.getAuthResponse()!.nome }}</span>
+            <p-button
+              [outlined]="true"
+              [style]="{width: '100%'}"
+              label="Sair"
+              icon="pi pi-sign-out"
+              (onClick)="authService.logout()"/>
+
+          </div>
+        </p-overlayPanel>
+      </button>
+    </div>
+  </div>
+
+  <div class="layout-main-container">
+    <div class="layout-main">
+      <router-outlet (activate)='onActivate($event)'></router-outlet>
+
+    </div>
+  </div>
+</div>

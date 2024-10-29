@@ -9,7 +9,8 @@ import {LoginUserDto} from '../../dtos/login-user.dto';
 import {LoadingService} from '../../shared/services/loading.service';
 import {LoginService} from './login.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {UsuarioDto} from '../../dtos/usuario.dto';
+import {RegisterUserDto} from '../../dtos/register-user.dto';
+import {emailValidator} from '../../shared/validators/email-validator';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: any;
   registerFormGroup: any;
-  usuarioDto: UsuarioDto = {} as UsuarioDto;
+  usuarioDto: RegisterUserDto = {} as RegisterUserDto;
 
   showStepper = false;
 
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
     });
 
     this.registerFormGroup = this._formBuilder.group({
-      email: ['', {disabled: true}],
+      email: ['', emailValidator()],
       nome: ['', Validators.required],
       senha: ['', passwordValidator()],
       confirmSenha: ['', Validators.required]
@@ -57,12 +58,13 @@ export class LoginComponent implements OnInit {
     .subscribe({
       next: (response) => {
         if (response) {
-          this.router.navigate(['/home']);
+          this.authService.setAuthResponse(response);
+          this.router.navigate(['/home/usuarios']);
         }
       },
       error: (error) => {
         this.confirmationService.confirm({
-          message: error,
+          message: error.error.message,
           icon: 'pi pi-times',
           acceptLabel: 'OK',
           rejectVisible: false,
@@ -84,7 +86,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.usuarioDto = this.registerFormGroup.value as UsuarioDto;
+    this.usuarioDto = this.registerFormGroup.value as RegisterUserDto;
 
     this.loading.start('Cadastrando Usuário...');
 

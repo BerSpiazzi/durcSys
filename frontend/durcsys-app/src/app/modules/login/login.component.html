@@ -31,16 +31,19 @@
 
             <span class="mb-2 flex justify-content-evenly">Preencha os campos abaixo para criar sua conta.</span>
             <label for="emailRegistro" class="block text-900 text-xl font-medium mb-2">E-mail</label>
-            <input id="emailRegistro" type="email" formControlName="email" placeholder="E-mail" pInputText class="w-full p-3 mb-3" size="40px">
+            <input id="emailRegistro" type="email" formControlName="email" placeholder="E-mail" pInputText class="w-full p-3" size="40px">
+            <div *ngIf="registerFormGroup.get('email')?.invalid && registerFormGroup.get('email')?.touched"
+                 class="text-red-500 text-xs">E-mail inválido
+            </div>
 
-            <label for="nome" class="block text-900 text-xl font-medium mb-2">Nome</label>
-            <input id="nome" type="text" formControlName="nome" placeholder="Nome" pInputText class="w-full p-3 mb-3" size="40px">
+            <label for="nome" class="block text-900 text-xl font-medium mb-2 mt-2">Nome</label>
+            <input id="nome" type="text" formControlName="nome" placeholder="Nome" pInputText class="w-full p-3 mb-2" size="40px">
 
             <label for="senhaRegistro" class="block text-900 text-xl font-medium mb-2">Senha</label>
-            <input id="senhaRegistro" type="password" formControlName="senha" placeholder="Senha" pInputText class="w-full p-3 mb-3" size="40px">
+            <input id="senhaRegistro" type="password" formControlName="senha" placeholder="Senha" pInputText class="w-full p-3 mb-2" size="40px">
 
             <label for="confirmSenha" class="block text-900 text-xl font-medium mb-2">Confirme a senha</label>
-            <input id="confirmSenha" type="password" formControlName="confirmSenha" placeholder="Confirme a senha" pInputText class="w-full p-3 mb-3"
+            <input id="confirmSenha" type="password" formControlName="confirmSenha" placeholder="Confirme a senha" pInputText class="w-full p-3 mb-2"
                    size="40px">
 
             <div class="flex justify-between">
