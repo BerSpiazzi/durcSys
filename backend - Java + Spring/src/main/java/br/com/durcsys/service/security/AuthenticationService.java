@@ -31,7 +31,7 @@ public class AuthenticationService {
         Optional<Usuario> userExists = userRepository.findByEmail(input.email());
 
         if (userExists.isPresent()) {
-            throw new UsuarioException("Usuário já cadastrado", HttpStatus.BAD_REQUEST);
+            throw new UsuarioException("Usuário com esse e-mail já cadastrado", HttpStatus.BAD_REQUEST);
         }
 
         Usuario user = Usuario.builder()
