@@ -62,12 +62,11 @@ export class UsuarioNovoComponent implements OnInit {
       next: (response) => {
         if (response) {
           this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Usuário criado com sucesso!'});
-          this.router.navigate(['/usuarios']);
+          this.router.navigate(['admin/home/usuarios']);
         }
       },
       error: (err) => {
-        console.error(err);
-        this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao criar usuário!'});
+        this.messageService.add({severity: 'error', summary: 'Erro no Cadastro', detail: err});
       }
     }).add(() => this.loading.done());
   }

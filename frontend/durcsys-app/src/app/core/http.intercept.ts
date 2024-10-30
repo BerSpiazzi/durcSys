@@ -35,10 +35,10 @@ export class HttpIntercept implements HttpInterceptor {
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
 
     if (err.status === 403 || err.status === 401) {
-      console.log('err', err);
       if (this.authService.check()) {
         this.confirmationService.confirm({
-          message: 'Sessão expirada! Realize o login novamente.',
+          header: 'Usuário não Cadastrado/Sessão Inválida',
+          message: 'Se necessário, limpe os cookies do navegador',
           icon: 'pi pi-exclamation-triangle',
           acceptLabel: 'OK',
           rejectVisible: false,

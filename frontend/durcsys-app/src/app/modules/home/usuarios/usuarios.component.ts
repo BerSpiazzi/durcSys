@@ -56,12 +56,10 @@ export class UsuariosComponent implements OnInit {
     const idUsuario = this.authService.getAuthResponse()?.idUsuario!;
 
     this.loadingService.start('Carregando usuários...');
-    console.log(idUsuario)
     this.usuarioService.findAll(idUsuario)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (response) => {
-        console.log(response);
         this.listUsuarios = response;
       },
       error: (error) => {
@@ -119,6 +117,7 @@ export class UsuariosComponent implements OnInit {
     });
 
     this.ref.onClose.subscribe((response) => {
+      console.log("AAAAAA" + response);
       if (response) {
         this.buscarUsuarios();
       }

@@ -19,7 +19,6 @@ export class AuthService {
 
   setAuthResponse(authResponse: AuthResponseDto): void {
 
-    console.log(authResponse);
     var encryptCookie = CryptoJS.AES.encrypt(JSON.stringify(authResponse), this.keyCrypt, {
       keySize: 16,
       mode: CryptoJS.mode.ECB,

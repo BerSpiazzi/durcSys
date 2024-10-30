@@ -5,7 +5,7 @@ import {FormBuilder} from '@angular/forms';
 import {Subject, takeUntil} from 'rxjs';
 import {UsuariosService} from '../usuarios.service';
 import {LoadingService} from '../../../../shared/services/loading.service';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-usuario-edit',
@@ -28,6 +28,7 @@ export class UsuarioEditComponent implements OnInit {
     private loadingService: LoadingService,
     private usuarioService: UsuariosService,
     private confirmService: ConfirmationService,
+    private messageService: MessageService
   ) {
     this.instance = this.dialogService.getInstance(this.ref);
   }
@@ -48,22 +49,20 @@ export class UsuarioEditComponent implements OnInit {
     this.ref.close(this.usuario);
   }
 
-  editar() {
-    this.loadingService.start('Atualiando usuário...');
+  salvar() {
+    this.loadingService.start('Atualizando usuário...');
 
     const usuario = this.formUsuario.getRawValue() as UsuarioDto;
+    usuario.id = this.usuario.id;
 
+    console.log(usuario);
     this.usuarioService.update(usuario)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: (response) => {
 
-        this.confirmService.confirm({
-          message: 'Usuário atualizado com sucesso',
-          accept: () => {
-            this.ref.close(usuario);
-          }
-        });
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Usuário atualizado com sucesso!'});
+        this.ref.close(usuario);
 
       },
       error: (error) => {

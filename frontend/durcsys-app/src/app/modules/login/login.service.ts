@@ -22,8 +22,8 @@ export class LoginService {
     return this.http.post<AuthResponseDto>(`${this.URL_API}/auth/login`, authRequest);
   }
 
-  register(usuarioDto: RegisterUserDto): Observable<any> {
-    return this.http.post<any>(`${this.URL_API}/auth/signup`, usuarioDto);
+  register(registerUserDto: RegisterUserDto): Observable<any> {
+    return this.http.post<any>(`${this.URL_API}/auth/signup`, registerUserDto);
 
   }
 }
