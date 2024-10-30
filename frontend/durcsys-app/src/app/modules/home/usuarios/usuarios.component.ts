@@ -25,7 +25,7 @@ export class UsuariosComponent implements OnInit {
   protected readonly getRowsPerPageOptions = getRowsPerPageOptions;
   protected readonly getRows = getRows;
 
-  showIncluir = false;
+  showIncluir = true;
 
   ref: DynamicDialogRef | undefined;
 
