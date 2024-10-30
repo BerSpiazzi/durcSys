@@ -8,12 +8,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Classe: UsuarioDto.
- *
- * @uthor: Bernardo Spiazzi
- * @since: 1.0 28/10/2024
- */
 @Getter
 @Setter
 @Builder
