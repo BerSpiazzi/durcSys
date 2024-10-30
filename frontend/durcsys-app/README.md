@@ -4,7 +4,8 @@ Versão Angular 18.2.10.
 
 ## Servidor de desenvolvimento
 
-Execute `ng serve` para iniciar um servidor de desenvolvimento. Navegue até `http://localhost:4200/`. 
+Execute `npm install` para instalar as dependências do projeto.
+Execute `npm start` para iniciar um servidor de desenvolvimento. Navegue até `http://localhost:4200/`. 
 A aplicação será recarregada automaticamente
 
 ## Tela de login
