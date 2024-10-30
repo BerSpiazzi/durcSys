@@ -45,7 +45,9 @@ public class UsuarioController {
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody Usuario usuario) {
 
-        return ResponseEntity.ok(usuarioService.updateUser(usuario));
+        usuarioService.updateUser(usuario);
+
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "Deletar usuário",

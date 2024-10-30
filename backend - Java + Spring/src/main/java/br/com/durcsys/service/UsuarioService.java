@@ -27,7 +27,7 @@ public class UsuarioService {
         Usuario user = usuarioRepository.findByEmail(usuario.getEmail()).orElse(null);
 
         if (user != null) {
-            throw new UsuarioException("Usuário já cadastrado", HttpStatus.BAD_REQUEST);
+            throw new UsuarioException("Usuário com esse e-mail já cadastrado", HttpStatus.BAD_REQUEST);
         }
 
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
@@ -48,11 +48,10 @@ public class UsuarioService {
         usuarioRepository.delete(usuario);
     }
 
-    public UsuarioDto updateUser(Usuario usuario) {
+    public void updateUser(Usuario usuario) {
 
         usuarioRepository.update(usuario.getId(), usuario.getNome(), usuario.getEmail());
 
-        return UsuarioDto.from(usuario);
     }
 
     public List<UsuarioDto> findAll(Long idUsuario) {
