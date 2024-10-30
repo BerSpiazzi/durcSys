@@ -4,5 +4,5 @@ import packageInfo from '../../package.json';
 export const environment = {
     production: false,
     api_url: apiUrl,
-    version: packageInfo,
+    version: '1.0.0',
 };

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {getRows, getRowsPerPageOptions} from '../../../shared/utils/table.utils';
 import {LoadingService} from '../../../shared/services/loading.service';
 import {UsuariosService} from './usuarios.service';
@@ -25,7 +25,7 @@ export class UsuariosComponent implements OnInit {
   protected readonly getRowsPerPageOptions = getRowsPerPageOptions;
   protected readonly getRows = getRows;
 
-  showIncluir = true;
+  showIncluir = false;
 
   ref: DynamicDialogRef | undefined;
 
@@ -40,6 +40,7 @@ export class UsuariosComponent implements OnInit {
     private layoutService: LayoutService,
     private router: Router,
     private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {
     this.layoutService.titleChange$.pipe(takeUntil(this.destroy$)).subscribe(title => {
       setTimeout(() => {
@@ -49,6 +50,8 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showIncluir = true;
+    this.cdr.detectChanges();
     this.buscarUsuarios();
   }
 
@@ -117,7 +120,6 @@ export class UsuariosComponent implements OnInit {
     });
 
     this.ref.onClose.subscribe((response) => {
-      console.log("AAAAAA" + response);
       if (response) {
         this.buscarUsuarios();
       }

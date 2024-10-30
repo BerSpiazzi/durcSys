@@ -55,7 +55,6 @@ export class UsuarioEditComponent implements OnInit {
     const usuario = this.formUsuario.getRawValue() as UsuarioDto;
     usuario.id = this.usuario.id;
 
-    console.log(usuario);
     this.usuarioService.update(usuario)
     .pipe(takeUntil(this.destroy$))
     .subscribe({
