@@ -37,7 +37,7 @@ export class HttpIntercept implements HttpInterceptor {
     if (err.status === 403 || err.status === 401) {
       if (this.authService.check()) {
         this.confirmationService.confirm({
-          header: 'Usuário não Cadastrado/Sessão Inválida',
+          header: 'Sessão Inválida',
           message: 'Se necessário, limpe os cookies do navegador',
           icon: 'pi pi-exclamation-triangle',
           acceptLabel: 'OK',
@@ -49,7 +49,7 @@ export class HttpIntercept implements HttpInterceptor {
         return of();
       } else {
         this.confirmationService.confirm({
-          message: 'Usuário e/ou senha inválidos',
+          message: 'Usuário não Cadastrado OU Usuário e/ou senha inválidos',
           icon: 'pi pi-exclamation-triangle',
           acceptLabel: 'OK',
           rejectVisible: false,
