@@ -26,7 +26,7 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
 
-    public Usuario signup(RegisterUserDto input) {
+    public void signup(RegisterUserDto input) {
 
         Optional<Usuario> userExists = userRepository.findByEmail(input.email());
 
@@ -40,7 +40,7 @@ public class AuthenticationService {
                 .nome(input.nome())
                 .build();
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public Usuario authenticate(LoginUserDto input) {

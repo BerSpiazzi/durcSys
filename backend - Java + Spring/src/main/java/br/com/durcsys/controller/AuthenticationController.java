@@ -13,6 +13,8 @@ import br.com.durcsys.models.Usuario;
 import br.com.durcsys.service.security.AuthenticationService;
 import br.com.durcsys.service.security.JwtService;
 
+import jakarta.validation.Valid;
+
 import io.swagger.v3.oas.annotations.Operation;
 
 @RequestMapping("/auth")
@@ -32,11 +34,11 @@ public class AuthenticationController {
     @Operation(summary = "Registrar usuário",
             description = "Cria um novo usuário no sistema através da tela inicial de cadastro")
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterUserDto registerUserDto) {
 
-        Usuario registeredUser = authenticationService.signup(registerUserDto);
+        authenticationService.signup(registerUserDto);
 
-        return ResponseEntity.ok(registeredUser);
+        return ResponseEntity.ok("Usuário cadastrado com sucesso");
     }
 
     @Operation(summary = "Autenticar usuário",
