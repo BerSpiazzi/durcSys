@@ -17,6 +17,7 @@ import {RegisterUserDto} from '../../../../dtos/register-user.dto';
 export class UsuarioNovoComponent implements OnInit {
 
   showSalvar = true;
+  showVoltar = true;
   title = 'Novo Usuário';
 
   private destroy$ = new Subject();
@@ -69,6 +70,10 @@ export class UsuarioNovoComponent implements OnInit {
         this.messageService.add({severity: 'error', summary: 'Erro no Cadastro', detail: err});
       }
     }).add(() => this.loading.done());
+  }
+
+  voltar(): void {
+    this.router.navigate(['admin/home/usuarios']);
   }
 
 }

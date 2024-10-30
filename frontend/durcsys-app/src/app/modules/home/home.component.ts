@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   title: string = 'Lista de Usuários';
   showIncluir = false;
   showSalvar = false;
+  showVoltar = false;
 
   constructor(
     protected authService: AuthService,
@@ -56,6 +57,7 @@ export class HomeComponent implements OnInit {
     this.title = $event.title;
     this.showIncluir = $event.showIncluir;
     this.showSalvar = $event.showSalvar;
+    this.showVoltar = $event.showVoltar;
   }
 
   novo() {
@@ -64,6 +66,10 @@ export class HomeComponent implements OnInit {
 
   salvar() {
     this.activeComponent.salvar();
+  }
+
+  voltar() {
+    this.activeComponent.voltar();
   }
 
 }
